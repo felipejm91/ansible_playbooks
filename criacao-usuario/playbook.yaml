@@ -1,3 +1,5 @@
+# Esse playbook tem por objetivo criar um usuário nos servidores, definindo uma senha e configurando a chave de acesso SSH
+
 - name: Criação de usuário
   hosts: all
   remote_user: root
@@ -31,6 +33,6 @@
         recurse: true
     - name: Copia chave SSH para authorized keys
       ansible.builtin.copy:
-        src: CAMINHO DA CHAVE
+        src: /home/felipe/.ssh/id_rsa
         dest: "/home/{{ usuario }}/.ssh/authorized_keys"
         
