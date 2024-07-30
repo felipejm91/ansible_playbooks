@@ -1,0 +1,13 @@
+# VARIÁVEIS PARA CONFIGURAÇÃO DO FAIL2BAN
+
+# Tempo que um host fica banido
+bantime: 10m
+
+# O host será banido se ultrapassar a quantidade de "maxretry" durante o "findtime"
+findtime: 10m
+
+#Quantidade de tentativas antes de ser banido
+maxretry: 5
+
+#Arquivo que será substituído no servidor e utilizado com arquivo de configuração
+fail2ban_file: /etc/fail2ban/jail.local
