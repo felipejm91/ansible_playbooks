@@ -1,0 +1,22 @@
+# REALIZA A CONFIGURAÇÃO DE USUÁRIOS COM AS SENHAS CRIPTOGRAFADAS. UTILIZA A LISTA DE USUÁRIOS DEFINIDA NO ARQUIVO user_vars.yaml
+---
+- name: Gerar a senha criptografada usuários
+  register: cripto_pwd_user  
+  ansible.builtin.shell: 
+    cmd: mkpasswd --method=sha-512 "{{ item.password }}" 
+  loop: "{{ users }}"
+
+
+- name: Criar um dicionário de senhas criptografadas #Mapeia a senha criptografada com cada usuário
+  ansible.builtin.set_fact:
+    encrypted_passwords: |
+      {{
+        dict(users | map(attribute='name') | zip(cripto_pwd_user.results | map(attribute='stdout')))
+      }}
+
+
+- name: Atualiza a senha para os usuários
+  loop: "{{ users }}"
+  ansible.builtin.user:
+    name: "{{ item.name }}"
+    password: "{{ encrypted_passwords[item.name] }}"

@@ -10,4 +10,4 @@ teste:
     # Eleva o nível do usuário a SUDO
     ansible_become: True
     #Quando executado o pipeline, a porta padrão SSH é alterada. Casoprecise executar o pipeline novamente, descomentar a variável abaixo
-    #ansible_port: "{{ ssh_port }}"
+    #ansible_port: "php{{ ssh_port }}"

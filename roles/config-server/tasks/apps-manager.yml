@@ -1,0 +1,13 @@
+# REALIZA A INSTALAÇÃO DE PROGRAMAS
+---
+- name: Atualizando repositórios e programas - APT UPDATE e APT UPGRADE
+  ansible.builtin.apt:
+    update_cache: true # Atualiza repositórios
+    upgrade: true # Atualiza programas
+
+# Irá realizar a instalação dos programas definidos na lista de instalação definidos no arquivo app.yaml
+- name: Instalar programas
+  ansible.builtin.apt:
+    state: present
+    name: "{{ item }}" 
+  loop: "{{ apps }}"

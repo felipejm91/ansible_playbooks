@@ -1,0 +1,13 @@
+# REALIZA A CONFIGURAÇÃO DO FAIL2BAN COM O TEMPLATE
+---
+- name: Copia configuração do template para fail2ban
+  ansible.builtin.template:
+    src: jail.local.j2
+    dest: "{{ fail2ban_file }}"
+
+
+- name: Reinicia serviço fail2ban
+  ansible.builtin.service:
+    name: fail2ban
+    state: restarted
+    enabled: true

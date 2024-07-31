@@ -1,0 +1,102 @@
+
+- name: Instalação e configuração Nginx
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Instalação Nginx
+      ansible.builtin.apt:
+        update_cache: true
+        name:
+          - nginx
+        state: present
+    - name: Copia template configuração Nginx
+      ansible.builtin.template:
+        src: ./nginx/nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+    - name: Reiniciar serviço Nginx
+      ansible.builtin.service:
+        name: nginx
+        state: restarted
+        enabled: true        
+
+- name: Instalação e configuração PHP
+  hosts: all
+  vars_files:
+    - ./php/php-vars.yaml
+    - ./php/php-modules.yaml
+  gather_facts: false
+  tasks:
+    - name: Instalação Software-Properties-Common
+      ansible.builtin.apt:
+        name:
+          - software-properties-common
+        update_cache: true
+        state: present
+    - name: Adicionar repositório PHP
+      ansible.builtin.apt_repository:
+        repo: "{{ php_repository }}"
+        state: present
+        update_cache: true
+    - name: Instalação PHP-FPM e módulos
+      ansible.builtin.apt:
+        update_cache: true
+        name: "{{ item }}"
+        state: present
+      loop: "{{ php_modules }}"
+    - name: Configuração PHP utilizando template
+      ansible.builtin.template:
+        src: ./php/php.ini.j2
+        dest: /etc/php/{{ php_version }}/fpm/php.ini
+    - name: Reiniciar o serviço do PHP-FPM
+      ansible.builtin.service:
+        name: "php{{ php_version }}-fpm"
+        state: restarted
+        enabled: true
+
+- name: Instalação e configuração do MySQL
+  gather_facts: false
+  hosts: all
+  vars_files:
+    - ./mysql/mysql-vars.yaml
+  tasks:
+    - name: Instalar MySQL
+      ansible.builtin.apt:
+        update_cache: true
+        name:
+          - mysql-server
+          - mysql-client
+        state: present
+    - name: Instalar Pip para gerenciar pacotes python
+      ansible.builtin.apt:
+        update_cache: true
+        name:
+          - python3-pip
+        state: present
+    - name: Instala módulo PyMySQL com Pip3
+      ansible.builtin.pip:
+        name:
+          - PyMySQL
+        state: present       
+    - name: Cria usuário admin no MySQL com perfil root
+      community.mysql.mysql_user:
+        name: "{{ mysql_user }}"
+        password: "{{ mysql_pwd }}"
+        state: present
+        plugin: mysql_native_password
+        priv: '*.*:ALL'
+    - name: Setar senha para usuário root
+      community.mysql.mysql_query:
+        login_user: "{{ mysql_user }}"
+        login_password: "{{ mysql_pwd }}"
+        query: 
+          - ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '{{  mysql_root_pwd  }}';
+          - FLUSH PRIVILEGES;
+    - name: Alterar configurações MySQL com template
+      ansible.builtin.template:
+        src: ./mysql/mysqld.cnf.j2
+        dest: /etc/mysql/mysql.conf.d/mysqld.cnf
+    - name: Reiniciar MySQL
+      ansible.builtin.service:
+        name: mysql
+        enabled: true
+        state: restarted

@@ -1,0 +1,20 @@
+# Este playbook realiza algumas configurações iniciais em servidores que acabaram de ser criados. Ele está funcional para distribuições Linux baseadas em Debian, mas com poucos ajustes é possível utiliza-lo para aplicações baseadas em RedHat.
+# As configurações que são realizadas aqui são:
+# 1 - Atualização dos repositórios e pacotes
+# 2 - Instalação dos programas e utilitários: net-tools, nano, ufw, fail2ban, whois
+# 3 - Alterar a configuração padrão do SSH
+# 4 - Libera portas do UFW
+# 5 - Configuração do Fail2ban
+# 6 - Altera senha do usuário padrão e do usuário root
+# 7 - Habilita UFW
+---
+- name: Configurações iniciais servidor  
+  hosts: all # Define quais grupos de hosts serão afetados
+  gather_facts: false #não registra os facts das tasks
+  roles:
+    - config-server
+        
+
+   
+      
+

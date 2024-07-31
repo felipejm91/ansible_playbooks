@@ -1,0 +1,9 @@
+# LISTA DE PORTAS QUE SERÃO LIBERADAS NO UFW. CASO DESEJE, ADICIONE OUTRAS PORTAS A LISTA.
+
+portas:
+  - porta: 80
+    proto: tcp
+  - porta: 443
+    proto: tcp
+  - porta: "{{ ssh_port }}"
+    proto: tcp

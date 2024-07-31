@@ -1,0 +1,38 @@
+# Essas tasks tem por objetivo criar um usuário nos servidores, definindo uma senha e configurando a chave de acesso SSH.
+---
+- name: Instalação do pacote WHOIS # Pacote WHOIS será utilizado para criptografar as senhas
+  ansible.builtin.apt:
+    name: whois
+    state: present
+    #Atualiza a lista de repositórios
+    update_cache: true
+
+
+- name: Gerar a senha criptografada
+  ansible.builtin.shell: "mkpasswd --method=sha-512 {{ senha }}"
+  register: cripto_pwd
+
+
+- name: Criar o usuário no Linux
+  ansible.builtin.user:
+    name: "{{ usuario }}"
+    shell: /bin/bash # Qual shell será utilizado pelo usuário
+    groups: sudo # Grupos que o usuário será incluído
+    append: true # Adiciona o usuário aos grupos definidos em "groups"
+    password: "{{ cripto_pwd.stdout }}" #passa a saída do register, apenas campo da senha
+
+
+- name: Criar o diretório SSH
+  ansible.builtin.file:
+    path: "/home/php{{ usuario }}/.ssh"
+    state: directory
+    group: "{{ usuario }}"
+    owner: "{{ usuario }}"
+    #cria diretório de forma recursiva
+    recurse: true
+
+
+- name: Copia chave SSH para authorized keys
+  ansible.builtin.copy:
+    src: /home/felipe/.ssh/id_rsa #Caminho da chave SSH do usuário que foi gerada. Alterar esse campo para a chave correta
+    dest: "/home/{{ usuario }}/.ssh/authorized_keys"

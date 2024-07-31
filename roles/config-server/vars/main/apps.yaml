@@ -1,0 +1,8 @@
+# LISTA DE PROGRAMAS QUE SERÃO INSTALADOS
+# CASO DESEJE, ADICIONE NOVOS PROGRAMAS A LISTA
+
+apps:
+  - net-tools
+  - nano
+  - ufw
+  - fail2ban

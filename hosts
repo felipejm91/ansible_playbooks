@@ -1,7 +1,7 @@
 # DECLARAÇÃO DOS HOSTS EM FORMATO INI
 
 [teste]
-129.148.23.146
+159.112.188.164
 
 
 [teste:vars]
@@ -11,4 +11,4 @@ ansible_user = ubuntu
 # Eleva o nível do usuário a SUDO
 ansible_become = True
 #Quando executado o pipeline, a porta padrão SSH é alterada. Casoprecise executar o pipeline novamente, descomentar a variável abaixo
-#ansible_port = 5561
+ansible_port = 5561

@@ -1,0 +1,9 @@
+---
+- name: Criptografar senha
+  ansible.builtin.shell:
+    cmd: "mkpasswd --method=sha-512 php{{ password }}"
+  register: cripto_pwd
+
+- name: Definir variável de senha criptografada
+  ansible.builtin.set_fact:
+    encrypted_password: "{{ cripto_pwd.stdout }}"

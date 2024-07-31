@@ -1,0 +1,42 @@
+# REALIZA AS CONFIGURAÇÕES INICIAIS NO SERVIDOR.
+---
+- name: Atualiza repositórios e instala programas
+  ansible.builtin.include_tasks: # inclui as tasks configuradas no arquivo
+    file: apps-manager.yml
+
+
+- name: Configuração fail2ban
+  ansible.builtin.include_tasks: # inclui as tasks configuradas no arquivo
+    file: fail2ban-conf.yml
+
+
+- name: Configura a senha usuários
+  ansible.builtin.include_tasks: # inclui as tasks configuradas no arquivo
+    file: user-config.yml
+
+    
+- name: Configuração personalizada SSH com template
+  ansible.builtin.template:
+    src: sshd_conf.j2
+    dest: "{{ ssh_file }}"
+
+
+- name: Libera portas no UFW 
+  community.general.ufw:
+    rule: allow
+    comment: 'Acesso a porta {{ item.porta }}'
+    proto: "{{ item.proto }}"
+    to_port: "{{ item.porta }}"
+  loop: "{{ portas }}"
+
+
+- name: Habilita UFW
+  community.general.ufw:
+    state: 'enabled'
+
+
+- name: Reinicia o serviço SSH
+  ansible.builtin.service:
+    name: sshd
+    state: restarted
+    enabled: true

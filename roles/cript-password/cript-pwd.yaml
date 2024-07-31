@@ -1,0 +1,6 @@
+---
+- name: Criptografar senha
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - senha

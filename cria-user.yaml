@@ -1,0 +1,19 @@
+# Esse playbook tem por objetivo criar um usuário nos servidores, definindo uma senha e configurando a chave de acesso SSH
+---
+- name: Criação de usuário
+  hosts: all
+  remote_user: ubuntu
+  gather_facts: false
+  become: true
+  vars_prompt:
+    - name: usuario
+      prompt: Qual é o usuário?
+      private: false # Faz com que o valor digitado não seja escondido
+
+    - name: senha
+      prompt: Qual é a senha?
+      private: true
+      confirm: true
+  
+  roles:
+    - criacao-usuario
