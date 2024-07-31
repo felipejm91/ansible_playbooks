@@ -1,6 +1,6 @@
 # MODELOS DE PLAYBOOK ANSIBLE
 
-Este repositório é composto por alguns modelos de playbooks para serem utilizados com Ansible. Fique a vonta de para utilizar da forma que desejar.
+Este repositório é composto por alguns modelos de playbooks para serem utilizados com Ansible. Fique a vontade para utilizar da forma que desejar.
 
 O intúito é servir de guia para algumas tarefas que podem ser automatizadas.
 
@@ -16,4 +16,4 @@ Os modelos disponíveis foram testados em um ambiente Ubuntu com os seguintes re
 
 ### DOCUMENTAÇÃO ANSIBLE
 
-[Ansible(https://docs.ansible.com/ansible/latest/getting_started/index.html)
+[Ansible](https://docs.ansible.com/ansible/latest/getting_started/index.html)
