@@ -1,0 +1,16 @@
+---
+- name: Instalação e configuração Nginx
+  hosts: all
+  gather_facts: false
+  roles:
+    - lemp-server
+
+  vars_prompt:
+    - name: mysql_root_pwd
+      prompt: Qual a senha para o usuário root do MySQL?
+      private: true
+      confirm: true
+
+    - name: var_port
+      prompt: Qual será a porta utilizada pelo MySQL?
+      private: false

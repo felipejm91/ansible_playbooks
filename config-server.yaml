@@ -13,7 +13,12 @@
   gather_facts: false #não registra os facts das tasks
   roles:
     - config-server
-        
+
+  vars_prompt:
+    - name: ssh_port
+      prompt: Qual porta será utilizada pelo SSH?
+      private: false
+           
 
    
       

@@ -1,7 +1,4 @@
 #VARIÁVEIS PARA CONFIGURAÇÃO DO SSH
 
-# Porta personalizada SSH
-ssh_port: 5561
-
 # Caminho do arquivo de configuração SSH que será substituído
 ssh_file: /etc/ssh/sshd_config

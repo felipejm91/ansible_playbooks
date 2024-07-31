@@ -1,3 +1,5 @@
+# MÓDULOS PHP QUE SERÃO INSTALADOS. CASO DESEJE INSTALAR MAIS MÓDULOS, ADICIONE AO FINAL DA LISTA SEGUINDO O MODELO
+
 php_modules:
   - "php{{ php_version }}-fpm"
   - "php{{ php_version }}-curl"      
