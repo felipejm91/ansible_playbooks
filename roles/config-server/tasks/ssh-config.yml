@@ -1,0 +1,5 @@
+---
+- name: Configuração personalizada SSH com template
+  ansible.builtin.template:
+    src: sshd_conf.j2
+    dest: "{{ ssh_file }}"

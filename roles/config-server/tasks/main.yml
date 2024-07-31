@@ -15,19 +15,14 @@
     file: user-config.yml
 
     
-- name: Configuração personalizada SSH com template
-  ansible.builtin.template:
-    src: sshd_conf.j2
-    dest: "{{ ssh_file }}"
+- name: Configuração SSH com template
+  ansible.builtin.include_tasks:
+    file: ssh-config.yml
 
 
-- name: Libera portas no UFW 
-  community.general.ufw:
-    rule: allow
-    comment: 'Acesso a porta {{ item.porta }}'
-    proto: "{{ item.proto }}"
-    to_port: "{{ item.porta }}"
-  loop: "{{ portas }}"
+- name: Libera portas no UFW
+  ansible.builtin.include_tasks:
+    file: ufw-config.yml
 
 
 - name: Habilita UFW
