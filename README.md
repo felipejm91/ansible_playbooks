@@ -17,3 +17,21 @@ Os modelos disponíveis foram testados em um ambiente Ubuntu com os seguintes re
 ### DOCUMENTAÇÃO ANSIBLE
 
 [Ansible](https://docs.ansible.com/ansible/latest/getting_started/index.html)
+
+
+### Execução dos Playbooks
+
+```
+ansible-playbook -i hosts NOME_PLAYBOOK
+```
+
+OU
+
+```
+ansible-playbook -i hosts.yaml NOME_PLAYBOOK
+```
+
+Ex: 
+    ```
+    ansible-playbook -i hosts config-server.yaml
+    ```

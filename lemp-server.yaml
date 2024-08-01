@@ -3,6 +3,7 @@
 ---
 - name: Instalação e configuração Nginx
   hosts: all
+  become: true
   gather_facts: false
   roles:
     - lemp-server

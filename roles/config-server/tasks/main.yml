@@ -5,6 +5,11 @@
     file: apps-manager.yml
 
 
+- name: altera tiemzone
+  community.general.timezone:
+    name: America/Sao_Paulo
+
+
 - name: Configuração fail2ban
   ansible.builtin.include_tasks: # inclui as tasks configuradas no arquivo
     file: fail2ban-conf.yml

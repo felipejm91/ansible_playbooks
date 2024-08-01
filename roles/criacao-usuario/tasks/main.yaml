@@ -36,3 +36,4 @@
   ansible.builtin.copy:
     src: /home/felipe/.ssh/id_rsa #Caminho da chave SSH do usuário que foi gerada. Alterar esse campo para a chave correta
     dest: "/home/{{ usuario }}/.ssh/authorized_keys"
+

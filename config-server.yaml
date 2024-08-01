@@ -10,6 +10,7 @@
 ---
 - name: Configurações iniciais servidor  
   hosts: all # Define quais grupos de hosts serão afetados
+  become: true
   gather_facts: false #não registra os facts das tasks
   roles:
     - config-server
