@@ -1,0 +1,12 @@
+# MÓDULOS PHP QUE SERÃO INSTALADOS. CASO DESEJE INSTALAR MAIS MÓDULOS, ADICIONE AO FINAL DA LISTA SEGUINDO O MODELO
+
+php_modules:
+  - "php{{ php_version }}-fpm"
+  - "php{{ php_version }}-curl"      
+  - "php{{ php_version }}-gd"
+  - "php{{ php_version }}-mbstring"
+  - "php{{ php_version }}-intl"
+  - "php{{ php_version }}-bcmath"
+  - "php{{ php_version }}-bz2"
+  - "php{{ php_version }}-readline"
+  - "php{{ php_version }}-zip"

@@ -1,0 +1,28 @@
+---
+# Executar a importação desses playbooks apenas se o servidor nunca tiver sido configurado
+####
+- name: Inclui playbook de configurações iniciais do servidor
+  ansible.builtin.import_playbook: 
+    config-server.yaml
+
+- name: Configuração do LEMP
+  ansible.builtin.import_playbook:
+    lemp-server.yaml
+####
+
+- name: Cria ambiente wordpress
+  hosts: all
+  become: true
+  gather_facts: false
+
+  roles:
+    - wordpress
+
+  vars_prompt:
+    - name: user-wordpress
+      prompt: Qual o usuário para executar o wordpress?
+      private: false
+
+    - name: nome-projeto
+      prompt: Qual o nome do projeto?
+      private: false

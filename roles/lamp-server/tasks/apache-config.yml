@@ -1,0 +1,14 @@
+---
+- name: Instalação Apache
+  ansible.builtin.apt:
+    update_cache: true
+    name:
+      - apache2
+    state: present
+
+
+- name: Reiniciar serviço Apache
+  ansible.builtin.service:
+    name: apache2
+    state: restarted
+    enabled: true     
