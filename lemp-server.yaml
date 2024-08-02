@@ -17,3 +17,7 @@
     - name: var_port # porta que o serviço do MySQL irá escutar
       prompt: Qual será a porta utilizada pelo MySQL?
       private: false
+
+    - name: php_version
+      prompt:  Qual versão do PHP para o projeto?
+      private: false

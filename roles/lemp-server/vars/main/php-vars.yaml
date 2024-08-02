@@ -1,7 +1,7 @@
 # VALORES QUE SERÃO UTILIZADOS PARA INSTALAÇÃO DO PHP E CONFIGURAÇÃO DO PHP.INI
 
 php_repository: ppa:ondrej/php
-php_version: 8.3
+#php_version: 8.3
 var_max_execution_time: 300
 var_memory_limit: 256M
 var_post_max_size: 20M

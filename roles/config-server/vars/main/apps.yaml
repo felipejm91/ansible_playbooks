@@ -6,3 +6,4 @@ apps:
   - nano
   - ufw
   - fail2ban
+  - unzip

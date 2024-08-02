@@ -1,0 +1,2 @@
+nginx_dir: /var/www/html
+wordpress_url: https://br.wordpress.org/latest-pt_BR.zip

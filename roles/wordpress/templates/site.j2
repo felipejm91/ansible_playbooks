@@ -1,0 +1,64 @@
+server {
+        listen 80;       
+        
+        root {{ nginx_dir }}/{{ nome_projeto }};
+        index index.php index.html index.htm;
+
+        server_name {{ nginx_domain }}; 
+
+        #HABILITA COMPRESSÃO DE ARQUIVOS PARA AUMENTAR PERFORMANCE
+        gzip on;
+        gzip_comp_level 5;
+        gzip_min_length 256;
+        gzip_proxied any;
+        gzip_vary on;
+        gzip_types
+        application/atom+xml
+        application/javascript
+        application/json
+        application/ld+json
+        application/manifest+json
+        application/rss+xml
+        application/vnd.geo+json
+        application/vnd.ms-fontobject
+        application/x-font-ttf
+        application/x-web-app-manifest+json
+        application/xhtml+xml
+        application/xml
+        font/opentype
+        image/bmp
+        image/svg+xml
+        image/x-icon
+        text/cache-manifest
+        text/css
+        text/plain
+        text/vcard
+        text/vnd.rim.location.xloc
+        text/vtt
+        text/x-component
+        text/x-cross-domain-policy;
+        #FIM PERFORMANCE POR GZIP
+
+        error_log /var/log/nginx/{{ nome_projeto }}-error.log;
+        access_log /var/log/nginx/{{ nome_projeto }}-access.log;
+
+        location / {
+            try_files $uri $uri/ /index.php?$args;
+        }
+
+        location /wp-admin/ {
+            try_files $uri $uri/ /index.php?$args;
+        }	
+
+        location = /xmlrpc.php {
+            deny all;
+            access_log off;
+            log_not_found off;
+            return 444;
+        }
+
+        location ~ \.php$ {
+            include snippets/fastcgi-php.conf;
+            fastcgi_pass unix:/var/run/php/php{{ php_version }}-fpm-{{ nome_projeto }}.sock;
+		}
+}

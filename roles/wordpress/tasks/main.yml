@@ -1,19 +1,30 @@
 ---
 - name: Cria usuário para wordpress
   ansible.builtin.user:
-    name: "{{ user-wordpress }}"
+    name: "{{ user_wordpress }}"
     append: true
-    comment: "Usuário para execução do ambiente wordpress do projeto {{ nome-projeto }}"
+    comment: "Usuário para execução do ambiente wordpress do projeto {{ nome_projeto }}"
     create_home: false # O usuário não fará login no servidor, apenas executará o wordpress    
     state: present
+
 
 - name: Copia o template pool PHP para o usuário
   ansible.builtin.template:
     src: pool-php.j2
-    dest: "/etc/php/{{ php_version }}/fpm/pool.d/{{ nome-projeto }}.conf"
-    
+    dest: "/etc/php/{{ php_version }}/fpm/pool.d/{{ nome_projeto }}.conf"
+
+
 - name: Reinicia o PHP-FPM
   ansible.builtin.service:
     name: "php{{ php_version }}-fpm"
     state: restarted
+    
+
+- name: Faz configuração ambiente Wordpress
+  ansible.builtin.include_tasks:
+    file: conf-wordpress.yml
+
+- name: Configura Nginx para wordpress
+  ansible.builtin.include_tasks:
+    file: conf-nginx.yml
     
