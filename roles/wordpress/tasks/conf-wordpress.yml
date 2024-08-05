@@ -15,6 +15,7 @@
 
 - name: Cria o banco de dados do Wordpress
   community.mysql.mysql_db:
+    login_unix_socket: /run/mysqld/mysqld.sock
     login_host: localhost
     login_user: "{{ mysql_admin }}"
     login_password: "{{ mysql_admin_pwd }}"
@@ -23,6 +24,7 @@
     
 - name: Cria usuário do banco de dados e atribui permissões
   community.mysql.mysql_user:
+    login_unix_socket: /run/mysqld/mysqld.sock
     login_host: localhost
     login_user: "{{ mysql_admin }}"
     login_password: "{{ mysql_admin_pwd }}"
