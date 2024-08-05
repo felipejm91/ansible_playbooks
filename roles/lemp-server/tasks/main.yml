@@ -1,9 +1,4 @@
 ---   
-- name: Instalação Nginx
-  ansible.builtin.include_tasks:
-    file: nginx-config.yml
-
-
 - name: Libera portas HTTP/HTTPS no UFW
   community.general.ufw:
     rule: allow
@@ -30,3 +25,13 @@
 - name: Instalação e configuração do MySQL
   ansible.builtin.include_tasks:
     file: mysql-config.yml
+
+
+- name: Instalação Nginx
+  ansible.builtin.include_tasks:
+    file: nginx-config.yml
+
+
+- name: Instalação e configuração do Certbot
+  ansible.builtin.include_tasks:
+    file: certbot-config.yml

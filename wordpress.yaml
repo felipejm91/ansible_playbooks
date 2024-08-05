@@ -1,14 +1,4 @@
 ---
-# Executar a importação desses playbooks apenas se o servidor nunca tiver sido configurado. Caso servidor já exista e esteje configurado, ignorar esses playbooks.
-####
-- name: Inclui playbook de configurações iniciais do servidor
-  ansible.builtin.import_playbook: 
-    config-server.yaml
-
-- name: Configuração do LEMP
-  ansible.builtin.import_playbook:
-    lemp-server.yaml
-####
 
 - name: Cria ambiente wordpress
   hosts: all
@@ -16,44 +6,65 @@
   gather_facts: false
 
   roles:
-    - wordpress
+    - role: config-server
+      when: tipo_de_play == '1' # Só será executado se for escolhido a opção 1 de configurar o servidor
+    
+    - role: lemp-server
+      when: tipo_de_play == '1' # Só será executado se for escolhido a opção 1 de configurar o servidor
+    
+    - role: wordpress # Sempre será executado nesse playbook     
 
   vars_prompt:
-    - name: user_wordpress
-      prompt: "Qual o usuário para executar o wordpress?"
+    - name: tipo_de_play
+      prompt: Deseja configurar o servidor ou apenas criar o ambiente wordpress? Configurar(1) / Wordpress(2)
       private: false
 
-    - name: nome_projeto
-      prompt: Qual o nome do projeto?
-      private: false
+    # - name: ssh_port
+    #   prompt: Qual porta será utilizada pelo SSH?
+    #   private: false
 
-    - name: php_version
-      prompt:  Qual versão do PHP para o projeto?
-      private: false
+    # - name: user_wordpress
+    #   prompt: "Qual o usuário para executar o wordpress?"
+    #   private: false
 
-    - name: mysql_admin
-      prompt: "Qual o usuário admin do MySQL?"
-      private: false
+    # - name: nome_projeto
+    #   prompt: Qual o nome do projeto?
+    #   private: false
 
-    - name: mysql_admin_pwd
-      prompt: Qual a senha do usuário admin do MySQL?
-      confirm: true
-      private: true      
+    # - name: php_version
+    #   prompt:  Qual versão do PHP para o projeto?
+    #   private: false
 
-    - name: db_name
-      prompt: Qual o nome do banco de dados?
-      private: false
+    # - name: mysql_admin
+    #   prompt: "Qual o usuário admin do MySQL?"
+    #   private: false
 
-    - name: db_user
-      prompt: Qual o nome do usuário do banco de dados?
-      private: false
+    # - name: mysql_admin_pwd
+    #   prompt: Qual a senha do usuário admin do MySQL?
+    #   confirm: true
+    #   private: true      
 
-    - name: db_user_pwd
-      prompt: Qual a senha do usuário do banco de dados?
-      private: true
-      confirm: true
+    # - name: mysql_port
+    #   prompt: Qual a porta de serviço do MySQL?
+    #   private: false
+
+    # - name: db_name
+    #   prompt: Qual o nome do banco de dados?
+    #   private: false
+
+    # - name: db_user
+    #   prompt: Qual o nome do usuário do banco de dados?
+    #   private: false
+
+    # - name: db_user_pwd
+    #   prompt: Qual a senha do usuário do banco de dados?
+    #   private: true
+    #   confirm: true
+
+    # - name: certbot_email
+    #   prompt:  Qual e-mail para utilizar no certbot?
+    #   private: false
 
     - name: nginx_domain
       prompt: Qual será o domínio utilizado no projeto?
       private: false
-    

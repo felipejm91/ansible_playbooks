@@ -1,12 +1,4 @@
 ---
-- name: Cria repositório Wordpress
-  ansible.builtin.file:
-    path: "{{ nginx_dir }}/{{ nome_projeto }}"
-    state: directory
-    group: "{{ user_wordpress }}"
-    mode: '755'
-    owner: "{{ user_wordpress }}"
-
 
 - name: Download e descompactar arquivos Wordpress
   ansible.builtin.unarchive:

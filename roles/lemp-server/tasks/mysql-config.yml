@@ -10,7 +10,7 @@
 
 - name: Setar senha para usuário root
   ansible.builtin.shell: |
-    mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '{{  mysql_root_pwd  }}';"
+    mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '{{  mysql_admin_pwd  }}';"
 
 
 - name: Alterar configurações MySQL com template

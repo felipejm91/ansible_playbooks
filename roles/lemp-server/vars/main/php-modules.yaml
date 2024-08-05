@@ -10,3 +10,4 @@ php_modules:
   - "php{{ php_version }}-bz2"
   - "php{{ php_version }}-readline"
   - "php{{ php_version }}-zip"
+  - "php{{ php_version }}-mysqli"

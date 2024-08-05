@@ -1,0 +1,20 @@
+---
+
+- name: Instalação certbot
+  community.general.apt:
+    name: 
+      - certbot
+      - python3-certbot-nginx
+    state: present
+
+
+# - name: Link simbólico certbot  
+#   ansible.builtin.file:
+#     state: link
+#     src: /snap/bin/certbot
+#     dest: /usr/bin/certbot
+
+
+- name: Registro de conta certbot
+  ansible.builtin.command:
+    "certbot --register --email {{ certbot_email }} --agree-tos"

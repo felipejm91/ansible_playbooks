@@ -1,30 +1,35 @@
 ---
-- name: Cria usuário para wordpress
-  ansible.builtin.user:
-    name: "{{ user_wordpress }}"
-    append: true
-    comment: "Usuário para execução do ambiente wordpress do projeto {{ nome_projeto }}"
-    create_home: false # O usuário não fará login no servidor, apenas executará o wordpress    
-    state: present
+# - name: Cria usuário para wordpress
+#   ansible.builtin.user:
+#     name: "{{ user_wordpress }}"
+#     # append: true
+#     comment: "Usuário para execução do ambiente wordpress do projeto {{ nome_projeto }}"
+#     create_home: false # O usuário não fará login no servidor, apenas executará o wordpress    
+#     state: present
 
 
-- name: Copia o template pool PHP para o usuário
-  ansible.builtin.template:
-    src: pool-php.j2
-    dest: "/etc/php/{{ php_version }}/fpm/pool.d/{{ nome_projeto }}.conf"
+# - name: Copia o template pool PHP para o usuário
+#   ansible.builtin.template:
+#     src: pool-php.j2
+#     dest: "/etc/php/{{ php_version }}/fpm/pool.d/{{ nome_projeto }}.conf"
 
 
-- name: Reinicia o PHP-FPM
-  ansible.builtin.service:
-    name: "php{{ php_version }}-fpm"
-    state: restarted
+# - name: Reinicia o PHP-FPM
+#   ansible.builtin.service:
+#     name: "php{{ php_version }}-fpm"
+#     state: restarted
     
 
-- name: Faz configuração ambiente Wordpress
-  ansible.builtin.include_tasks:
-    file: conf-wordpress.yml
+# - name: Faz configuração ambiente Wordpress
+#   ansible.builtin.include_tasks:
+#     file: conf-wordpress.yml
 
-- name: Configura Nginx para wordpress
-  ansible.builtin.include_tasks:
-    file: conf-nginx.yml
+# - name: Configura Nginx para wordpress
+#   ansible.builtin.include_tasks:
+#     file: conf-nginx.yml
     
+- name: Configura certificado de segurança
+  ansible.builtin.shell: |
+    certbot --nginx -d "{{ nginx_domain }}"
+  when:  nginx_domain != 'localhost' and nginx_domain != '127.0.0.1'
+        
