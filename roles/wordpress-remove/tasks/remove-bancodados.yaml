@@ -1,0 +1,18 @@
+---
+- name: Remove banco de dados
+  community.mysql.mysql_db:
+    login_unix_socket: "{{ login_unix_socket_mysql }}"
+    login_host: localhost
+    login_user: "{{ mysql_admin }}"
+    login_password: "{{ mysql_admin_pwd }}"
+    name: "{{ db_name }}"
+    state: absent
+
+- name: Remove usuário banco de dados
+  community.mysql.mysql_user:
+    login_unix_socket: "{{ login_unix_socket_mysql }}"
+    login_host: localhost
+    login_user: "{{ mysql_admin }}"
+    login_password: "{{ mysql_admin_pwd }}"
+    name: "{{ db_user }}"
+    state: absent

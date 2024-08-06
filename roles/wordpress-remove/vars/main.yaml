@@ -1,0 +1,8 @@
+projeto_dir: /var/www/eficaz
+backup_dir: /BACKUP
+login_unix_socket_mysql: /run/mysqld/mysqld.sock
+mysql_admin: root
+backup_files:
+  - "{{ backup_dir }}/script_bkp.sh"
+  - "{{ backup_dir }}/script_bkp_arq_lojas.sh"
+  - "{{ backup_dir }}/script_limpa_bkp.sh"

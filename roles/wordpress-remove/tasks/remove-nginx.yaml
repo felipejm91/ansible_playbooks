@@ -1,0 +1,24 @@
+---
+- name: Exclui arquivos Nginx
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "/etc/nginx/sites-available/{{ nginx_domain }}"
+    - "/etc/nginx/sites-enabled/{{ nginx_domain }}"
+
+
+- name: Reinicia serviço Nginx
+  ansible.builtin.service:
+    name: nginx
+    state: restarted
+
+
+- name: Remove arquivos Letsencrypt
+  ansible.builtin.file:
+    path: "{{ item }}"    
+    state: absent
+  loop:
+    - "/etc/letsencrypt/archive/{{ nginx_domain }}"
+    - "/etc/letsencrypt/live/{{ nginx_domain }}"
+    - "/etc/letsencrypt/renewal/{{ nginx_domain }}.conf"

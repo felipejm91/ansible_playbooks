@@ -1,0 +1,16 @@
+---
+- name: Remove arquivo usuário PHP
+  ansible.builtin.import_tasks:
+    file: remove-php.yaml
+
+- name: Remove configuração Nginx
+  ansible.builtin.import_tasks:
+    file: remove-nginx.yaml
+
+- name: Remove diretórios do projeto e configurações de backup
+  ansible.builtin.import_tasks:
+    file: remove-wordpress.yaml
+
+- name: Remove banco de dados
+  ansible.builtin.import_tasks:
+    file: remove-bancodados.yaml
