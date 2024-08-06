@@ -23,6 +23,7 @@
     name: "php{{ version_php.stdout }}-fpm"
     state: restarted
 
+
 - name: Remove usuário PHP do Wordpress
   ansible.builtin.user:
     name: "{{ nome_projeto }}"

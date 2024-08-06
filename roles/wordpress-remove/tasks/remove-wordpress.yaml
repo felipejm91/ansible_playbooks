@@ -3,17 +3,4 @@
   ansible.builtin.file:
     path: "{{ projeto_dir }}/{{ nome_projeto }}"
     state: absent
-
-
-- name: Remove pasta backup
-  ansible.builtin.file:
-    path: "{{ backup_dir }}/{{ nome_projeto }}"
-    state: absent
-
-- name: Remove scripts backup    
-  ansible.builtin.shell: |
-    grep -v "{{ nome_projeto }}" "{{ item }}" > "{{ item }}_temp"
-    mv {{ item }}_temp {{ item }}
-    chmod +x {{ item }}
-  loop: "{{ backup_files }}"
     
