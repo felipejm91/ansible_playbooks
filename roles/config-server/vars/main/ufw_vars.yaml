@@ -3,7 +3,10 @@
 portas:
   - porta: 80
     proto: tcp
+    comentario: "Acesso porta HTTP"
   - porta: 443
     proto: tcp
+    comentario: "Acesso porta HTTPS"
   - porta: "{{ ssh_port }}"
     proto: tcp
+    comentario: "Acesso porta SSH"

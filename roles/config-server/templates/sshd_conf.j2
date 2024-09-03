@@ -2,8 +2,8 @@ Include /etc/ssh/sshd_config.d/*.conf
 
 Port {{ ssh_port }}
 #AddressFamily any
-#ListenAddress 0.0.0.0
-#ListenAddress ::
+ListenAddress 0.0.0.0
+ListenAddress ::
 
 #HostKey /etc/ssh/ssh_host_rsa_key
 #HostKey /etc/ssh/ssh_host_ecdsa_key

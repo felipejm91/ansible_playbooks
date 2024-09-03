@@ -35,8 +35,8 @@
     state: 'enabled'
 
 
-- name: Reinicia o serviço SSH
+- name: Recarrega o serviço SSH
   ansible.builtin.service:
-    name: sshd
-    state: restarted
+    name: ssh
+    state: reloaded
     enabled: true
