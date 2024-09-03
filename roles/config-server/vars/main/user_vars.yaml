@@ -1,7 +1,7 @@
 #VARIÁVEIS PARA CONFIGURAÇÃO DE USUÁRIOS.
 
 users:
-  - name: ubuntu
-    password: AvWRrfHmekeu640@8SYOsb1DwieBuaQ
-  - name: root
-    password: CT@ddyvOEb9QdIc4MCW4ahfXHQG8jW
+  - name: USER1
+    password: SENHA1
+  - name: USER2
+    password: SENHA2
