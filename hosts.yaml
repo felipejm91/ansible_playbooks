@@ -1,0 +1,13 @@
+# DECLARAÇÃO DOS HOSTS EM FORMATO YAML
+
+teste:
+  hosts:
+    IP:
+  vars:
+    ansible_ssh_private_key_file: CAMINHO_CHAVE_SSH
+    # Define o usuário remoto que será utilizado na execução do pipeline
+    ansible_user: USER
+    # Eleva o nível do usuário a SUDO
+    ansible_become: True
+    #Quando executado o pipeline, a porta padrão SSH é alterada. Casoprecise executar o pipeline novamente, descomentar a variável abaixo
+    #ansible_port: "php{{ ssh_port }}"

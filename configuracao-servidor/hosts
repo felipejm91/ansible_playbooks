@@ -1,24 +1,12 @@
 # DECLARAÇÃO DOS HOSTS EM FORMATO INI
 
 [files]
-64.181.177.42
+IP
 
 
 [files:vars]
-ansible_ssh_private_key_file = /home/felipe.meneguetti/Documentos/CHAVES-ACESSO-SERVIDORES/ORACLE/ANJOS/id_rsa
+ansible_ssh_private_key_file = CAMINHO_CHAVE_SSH
 # Define o usuário remoto que será utilizado na execução do pipeline
-ansible_user = ubuntu
+ansible_user = USER
 #Quando executado o pipeline, a porta padrão SSH é alterada. Casoprecise executar o pipeline novamente, descomentar a variável abaixo
-ansible_port = 5590
-
-
-
-[varnish]
-146.235.38.38
-
-[varnish:vars]
-ansible_ssh_private_key_file = /home/felipe.meneguetti/Documentos/CHAVES-ACESSO-SERVIDORES/ORACLE/ANJOS/id_rsa
-# Define o usuário remoto que será utilizado na execução do pipeline
-ansible_user = ubuntu
-#Quando executado o pipeline, a porta padrão SSH é alterada. Casoprecise executar o pipeline novamente, descomentar a variável abaixo
-ansible_port = 5590
+ansible_port = PORTA
