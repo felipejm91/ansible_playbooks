@@ -1,0 +1,43 @@
+# Playbook para criação de ambiente wordpress
+
+---
+- name: Cria ambiente wordpress
+  hosts: teste
+  become: true
+  gather_facts: false
+
+  roles:  
+    - role: wordpress-create
+
+  vars_prompt:
+    - name: nome_projeto
+      prompt: Qual o nome do projeto?
+      private: false
+
+    - name: mysql_admin_pwd
+      prompt: Qual a senha do usuário admin do MySQL?
+      confirm: true
+      private: true      
+
+    - name: db_name
+      prompt: Qual o nome do banco de dados?
+      private: false
+
+    - name: db_user
+      prompt: Qual o nome do usuário do banco de dados?
+      private: false
+
+    - name: db_user_pwd
+      prompt: Qual a senha do usuário do banco de dados?
+      private: true
+      confirm: true
+
+    - name: php_version
+      prompt: Qual a versão do PHP que será utilizada no projeto?
+      private: false
+
+    - name: nginx_domain
+      prompt: Qual será o domínio utilizado no projeto?
+      private: false
+
+    

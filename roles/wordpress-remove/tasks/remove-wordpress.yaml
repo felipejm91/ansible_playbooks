@@ -1,6 +1,0 @@
----
-- name: Remove arquivos wordpress
-  ansible.builtin.file:
-    path: "{{ projeto_dir }}/{{ nome_projeto }}"
-    state: absent
-    

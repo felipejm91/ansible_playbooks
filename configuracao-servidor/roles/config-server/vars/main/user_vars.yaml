@@ -1,0 +1,7 @@
+#VARIÁVEIS PARA CONFIGURAÇÃO DE USUÁRIOS.
+
+users:
+  - name: ubuntu
+    password: AvWRrfHm40@8Sekeu6YOsb1DwieBuaQ
+  - name: root
+    password: AvWRrfHm40@8Sekeb1Du6YOswieBuaQ

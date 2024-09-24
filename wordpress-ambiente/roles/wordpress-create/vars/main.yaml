@@ -1,0 +1,7 @@
+nginx_dir: /var/www/eficaz
+wordpress_url: https://br.wordpress.org/latest-pt_BR.zip
+mysql_admin: root
+mysql_port: 5524
+bkp_server: BKP-SRV-TESTE
+
+# php_version: 8.1

@@ -1,0 +1,8 @@
+---
+- name: Libera portas no UFW 
+  community.general.ufw:
+    rule: allow
+    comment: '{{ item.comment }}'
+    proto: "{{ item.proto }}"
+    to_port: "{{ item.porta }}"
+  loop: "{{ portas }}"

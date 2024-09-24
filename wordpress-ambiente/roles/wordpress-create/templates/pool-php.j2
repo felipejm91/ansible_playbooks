@@ -1,0 +1,13 @@
+[{{ nome_projeto }}]
+
+user = {{ nome_projeto }}
+group = {{ nome_projeto }}
+
+listen = /run/php/php{{ php_version }}-fpm-{{ nome_projeto }}.sock
+
+listen.owner = www-data
+listen.group = www-data
+
+pm = ondemand
+pm.max_children = 5
+pm.process_idle_timeout = 60

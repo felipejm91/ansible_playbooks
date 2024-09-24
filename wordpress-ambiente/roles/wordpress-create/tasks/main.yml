@@ -1,0 +1,26 @@
+---
+- name: Configurações de usuário PHP do Wordpress
+  ansible.builtin.import_tasks:
+    file: config-user-php.yml
+
+
+- name: Faz configuração ambiente Wordpress
+  ansible.builtin.include_tasks:
+    file: conf-wordpress.yml
+
+
+- name: Configura Nginx para wordpress
+  ansible.builtin.include_tasks:
+    file: conf-nginx.yml
+    
+
+- name: Configura certificado de segurança
+  ansible.builtin.shell: |
+    certbot --nginx -d  "{{ nginx_domain }}"
+  when:  nginx_domain != 'localhost' and nginx_domain != '127.0.0.1'
+
+
+- name: Configura scripts Backup
+  ansible.builtin.include_tasks:
+    file: backup-config.yml    
+        

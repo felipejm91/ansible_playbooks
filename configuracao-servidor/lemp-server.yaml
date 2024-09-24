@@ -1,0 +1,27 @@
+# Este playbook tem por objetivo configurar um servidor LEMP - Nginx, PHP, MySQL
+
+---
+- name: Instalação e configuração Nginx
+  hosts: varnish
+  become: true
+  gather_facts: false
+  roles:
+    - lemp-server
+
+  vars_prompt:
+    - name: mysql_admin_pwd # senha do usuário root do MySQL. Ao instalar o MySQL, o usuário root é configurado sem senha inicialmente
+      prompt: Qual a senha para o usuário root do MySQL?
+      private: true
+      confirm: true
+
+    - name: mysql_port # porta que o serviço do MySQL irá escutar
+      prompt: Qual será a porta utilizada pelo MySQL?
+      private: false
+
+    - name: php_version
+      prompt:  Qual versão do PHP para o projeto?
+      private: false
+
+    - name: certbot_email
+      prompt:  Qual e-mail para utilizar no certbot?
+      private: false

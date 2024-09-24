@@ -1,0 +1,42 @@
+# REALIZA AS CONFIGURAÇÕES INICIAIS NO SERVIDOR.
+---
+- name: Atualiza repositórios e instala programas
+  ansible.builtin.include_tasks: # inclui as tasks configuradas no arquivo
+    file: apps-manager.yml
+
+
+- name: altera timezone
+  community.general.timezone:
+    name: America/Sao_Paulo
+
+
+- name: Configuração fail2ban
+  ansible.builtin.include_tasks: # inclui as tasks configuradas no arquivo
+    file: fail2ban-conf.yml
+
+
+- name: Configura a senha usuários
+  ansible.builtin.include_tasks: # inclui as tasks configuradas no arquivo
+    file: user-config.yml
+
+    
+- name: Configuração SSH com template
+  ansible.builtin.include_tasks:
+    file: ssh-config.yml
+
+
+- name: Libera portas no UFW
+  ansible.builtin.include_tasks:
+    file: ufw-config.yml
+
+
+- name: Habilita UFW
+  community.general.ufw:
+    state: 'enabled'
+
+
+- name: Recarrega o serviço SSH
+  ansible.builtin.service:
+    name: ssh
+    state: reloaded
+    enabled: true

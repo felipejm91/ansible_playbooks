@@ -1,0 +1,37 @@
+---   
+- name: Libera portas HTTP/HTTPS no UFW
+  community.general.ufw:
+    rule: allow
+    comment: 'Acesso a porta {{ item.porta }}'
+    proto: "{{ item.proto }}"
+    to_port: "{{ item.porta }}"
+  loop: 
+    - porta: 80
+      proto: tcp
+    - porta: 443
+      proto: tcp
+
+
+# - name: Instalação e configuração PHP
+#   ansible.builtin.include_tasks:
+#     file: php-config.yml
+
+
+# - name: Instalação de pacote python para gerenciar MySQL
+#   ansible.builtin.include_tasks:
+#     file: python-package.yml
+
+
+# - name: Instalação e configuração do MySQL
+#   ansible.builtin.include_tasks:
+#     file: mysql-config.yml
+
+
+- name: Instalação Nginx
+  ansible.builtin.include_tasks:
+    file: nginx-config.yml
+
+
+- name: Instalação e configuração do Certbot
+  ansible.builtin.include_tasks:
+    file: certbot-config.yml

@@ -1,3 +1,0 @@
-projeto_dir: /var/www/eficaz
-login_unix_socket_mysql: /run/mysqld/mysqld.sock
-mysql_admin: root

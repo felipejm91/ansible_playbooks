@@ -1,0 +1,44 @@
+[teste]
+159.112.179.113
+
+[teste:vars]
+ansible_ssh_private_key_file=/home/felipe.meneguetti/Documentos/CHAVES-ACESSO-SERVIDORES/ORACLE/CHAVES-FELIPE/efilive-wp-dev
+ansible_user=felipe
+ansible_port=5561
+
+#########################################
+
+[producao]
+146.235.47.37
+
+[producao:vars]
+ansible_ssh_private_key_file=/home/felipe.meneguetti/Documentos/CHAVES-ACESSO-SERVIDORES/ORACLE/ucomback.key
+ansible_user=ubuntu
+ansible_port=5561
+
+#########################################
+
+[varnish]
+  168.75.107.98
+
+[varnish:vars]
+ansible_ssh_private_key_file=/home/felipe.meneguetti/Documentos/CHAVES-ACESSO-SERVIDORES/ORACLE/ucomfront.key
+ansible_user=ubuntu
+ansible_port=5561
+
+#########################################
+
+[producao]
+
+[producao:children]
+    producao
+    varnish
+
+#########################################
+[testeprod]
+144.22.230.219
+
+[testeprod:vars]
+ansible_ssh_private_key_file=/home/felipe.meneguetti/.ssh/ansible-teste
+ansible_user=ubuntu
+#ansible_port=5561
