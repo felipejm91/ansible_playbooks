@@ -12,19 +12,14 @@
       proto: tcp
 
 
-# - name: Instalação e configuração PHP
-#   ansible.builtin.include_tasks:
-#     file: php-config.yml
+- name: Instalação e configuração PHP
+  ansible.builtin.include_tasks:
+    file: php-config.yml
 
 
-# - name: Instalação de pacote python para gerenciar MySQL
-#   ansible.builtin.include_tasks:
-#     file: python-package.yml
-
-
-# - name: Instalação e configuração do MySQL
-#   ansible.builtin.include_tasks:
-#     file: mysql-config.yml
+- name: Instalação e configuração do MySQL
+  ansible.builtin.include_tasks:
+    file: mysql-config.yml
 
 
 - name: Instalação Nginx
