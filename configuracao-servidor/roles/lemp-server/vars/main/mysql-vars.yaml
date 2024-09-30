@@ -1,7 +1,7 @@
 # Hosts que o MySQL irá aceitar conexão
-var_bind_address: 191.23.81.12,191.5.165.93,172.16.1.177
+var_bind_address: 127.0.0.1
 # Endereço de ligação para MySQL X Plugin
-var_mysqlx_bind_address: 191.23.81.12,191.5.165.93,172.16.1.177
+var_mysqlx_bind_address: 127.0.0.1
 # Tamanho do buffer de chaves para tabelas MyISAM
 var_key_buffer_size: 256M
 # Tamanho da pilha para cada thread
