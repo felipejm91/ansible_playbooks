@@ -6,4 +6,4 @@ apps:
   - ufw
   - fail2ban
   - unzip
-  - python3-pymsql
+  - python3-pymysql
