@@ -46,9 +46,13 @@ server {
             try_files $uri $uri/ /index.php?$args;
         }
 
+        location /wp-admin {
+              try_files $uri $uri /index.php?$args;
+        }
+
         location /wp-admin/ {
-            try_files $uri $uri/ /index.php?$args;
-        }	
+              try_files $uri $uri/ /index.php?$args;
+        }
 
         location = /xmlrpc.php {
             deny all;
