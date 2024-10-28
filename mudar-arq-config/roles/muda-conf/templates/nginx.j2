@@ -15,7 +15,7 @@ http {
         #security headers
         #add_header X-Frame-Options "SAMEORIGIN";
         add_header X-Content-Type-Options nosniff;
-        add_header Strict-Transport-Security 'max-age=31536000; includeSubDomains; preload'; 
+        add_header Strict-Transport-Security "max-age=15768000;" always;
         add_header X-XSS-Protection "1; mode=block";
 
         #configuração buffer
@@ -26,9 +26,9 @@ http {
         #configuração timeout
         client_body_timeout 30;
         client_header_timeout 30;
-        keepalive_timeout 30;
+        keepalive_timeout 10;
         keepalive_requests 10000;
-        send_timeout 15;
+        send_timeout 10;
 
         #permite servidor fechar conexão de clientes que não respondem
         reset_timedout_connection on;
