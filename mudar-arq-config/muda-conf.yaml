@@ -1,0 +1,7 @@
+---
+- name: Alterar arquivo de configuração servidores
+  hosts: all
+  become: true
+  gather_facts: false
+  roles:
+    - muda-conf

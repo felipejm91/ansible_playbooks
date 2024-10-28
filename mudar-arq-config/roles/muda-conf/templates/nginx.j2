@@ -1,0 +1,69 @@
+user www-data;
+worker_processes auto;
+worker_rlimit_nofile 10000;
+pid /run/nginx.pid;
+include /etc/nginx/modules-enabled/*.conf;
+
+events {
+        worker_connections 500;
+        multi_accept on;
+        use epoll;
+}
+
+
+http {
+        #security headers
+        #add_header X-Frame-Options "SAMEORIGIN";
+        add_header X-Content-Type-Options nosniff;
+        add_header Strict-Transport-Security 'max-age=31536000; includeSubDomains; preload'; 
+        add_header X-XSS-Protection "1; mode=block";
+
+        #configuração buffer
+        client_body_buffer_size 100k;
+        client_header_buffer_size 5M;
+        large_client_header_buffers 4 256k;
+
+        #configuração timeout
+        client_body_timeout 30;
+        client_header_timeout 30;
+        keepalive_timeout 30;
+        keepalive_requests 10000;
+        send_timeout 15;
+
+        #permite servidor fechar conexão de clientes que não respondem
+        reset_timedout_connection on;
+
+        sendfile on;
+        tcp_nopush on;
+        tcp_nodelay on;
+        client_max_body_size 30M;
+        types_hash_max_size 1024;
+        server_tokens off;
+
+        include /etc/nginx/mime.types;
+        default_type application/octet-stream;
+
+        # SSL Settings
+        ssl_protocols TLSv1.2 TLSv1.3;
+        ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-CHACHA20-POLY1305;
+        ssl_prefer_server_ciphers off;
+
+        # OCSP stapling
+        ssl_stapling on;
+        ssl_stapling_verify on;
+
+        # Gzip Settings
+        fastcgi_buffers 16 32k;
+        fastcgi_buffer_size 64k;
+        fastcgi_busy_buffers_size 64k;
+
+        gzip on;
+        gzip_comp_level  2;
+        gzip_min_length  10240;
+        gzip_vary on;
+        gzip_disable msie6;
+        gzip_proxied expired no-cache no-store private auth;
+
+        include /etc/nginx/conf.d/*.conf;
+        include /etc/nginx/sites-enabled/*;
+}

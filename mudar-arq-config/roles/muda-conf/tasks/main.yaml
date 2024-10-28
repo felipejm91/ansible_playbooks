@@ -1,0 +1,10 @@
+- name: Configuração a ser alterada
+  ansible.builtin.template:
+    src: nginx.j2
+    dest: "{{ dir_file }}"
+
+- name: Restarta serviço
+  ansible.builtin.service:
+    name: nginx
+    state: restarted
+    enabled: true   

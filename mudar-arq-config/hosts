@@ -1,0 +1,8 @@
+[server]
+IP
+
+[server:vars]
+ansible_ssh_private_key_file=PATH-TO-KEY/id_rsa.key
+ansible_user=USER
+ansible_port=SSH_PORT
+
