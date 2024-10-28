@@ -65,4 +65,10 @@ server {
             include snippets/fastcgi-php.conf;
             fastcgi_pass unix:/var/run/php/php{{ php_version }}-fpm-{{ nome_projeto }}.sock;
 		}
+
+        # Bloqueia acesso à arquivos ocultos
+        location ~ /\.
+        {
+	        deny all; return 404;
+        }
 }
