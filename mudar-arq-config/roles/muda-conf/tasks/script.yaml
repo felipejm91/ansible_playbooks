@@ -1,0 +1,17 @@
+- name: Configura Http2 nos Nginx dos sites
+  ansible.builtin.copy:
+    src: enable-http2.sh
+    dest: "{{ dir_file }}"
+    group: "root"
+    mode: "0751"
+    owner: "root"
+
+- name: Executa script Http2
+  ansible.builtin.shell: "{{ dir_file }}/{{ script_to_execute }}"
+    
+
+- name: Restarta serviço
+  ansible.builtin.service:
+    name: nginx
+    state: restarted
+    enabled: true   
